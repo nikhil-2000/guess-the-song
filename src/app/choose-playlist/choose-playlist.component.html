@@ -1,0 +1,12 @@
+
+<div *ngIf="!(loggedIn)">
+  <p>Login for your playlists to appear {{this.loggedIn}}</p>
+  <button (click)="login()">Login</button>
+  <button (click)="isLoggedIn()"> {{this.loggedIn}}</button>
+</div>
+
+<div *ngIf="loggedIn">
+  <p>Here are you playlists</p>
+</div>
+
+

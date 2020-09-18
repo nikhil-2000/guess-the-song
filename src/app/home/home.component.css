@@ -1,0 +1,8 @@
+.background {
+  background-image: url('~src/assets/blackGreenBackground.jpg');
+  height : 100%;
+}
+
+.text {
+  color : black;
+}

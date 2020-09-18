@@ -1,0 +1,8 @@
+Guess the Song
+
+Choose a Playlist, or own songs
+5 second countdown
+Song starts playing
+User has 30 seconds on Clock
+Each correct guess, + 5 seconds, + song reveal
+Keep going till timer runs out or all songs in playlist are played
