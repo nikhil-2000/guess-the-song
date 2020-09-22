@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SpotifyService} from '../spotify.service';
-import * as querystring from 'querystring';
-import {DefaultUrlSerializer} from '@angular/router';
+import { SpotifyService} from '../services/spotify.service';
 
 
 @Component({
@@ -11,21 +9,19 @@ import {DefaultUrlSerializer} from '@angular/router';
 })
 export class ChoosePlaylistComponent implements OnInit {
 
-  loggedIn = this.isLoggedIn();
 
-  constructor(private spotifyService: SpotifyService) {}
+  constructor(public spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
+    this.getPlaylists();
   }
 
-  login(): void{
-    this.loggedIn = this.spotifyService.getAuthToken();
+  getPlaylists(): void{
+    this.spotifyService.getUserPlaylists();
   }
 
-  isLoggedIn(): boolean{
-    const parser = new DefaultUrlSerializer();
-    const accessToken = parser.parse(window.location.search).queryParamMap.get('code');
-    return !(!accessToken || 0 === accessToken.length);
+  check(): void{
+    console.log(this.spotifyService.userPlaylists);
+    console.log(this.spotifyService.tokens);
   }
-
 }

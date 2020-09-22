@@ -1,12 +1,12 @@
 
-<div *ngIf="!(loggedIn)">
-  <p>Login for your playlists to appear {{this.loggedIn}}</p>
-  <button (click)="login()">Login</button>
-  <button (click)="isLoggedIn()"> {{this.loggedIn}}</button>
+<div>
+  <p>Here are you playlists</p>
+  <button (click)="getPlaylists()">Click here to show playlist object</button>
+  <button (click)="check()">Check</button>
 </div>
 
-<div *ngIf="loggedIn">
-  <p>Here are you playlists</p>
+<div *ngFor="let playlist of this.spotifyService.userPlaylists">
+  <app-playlist playlistData="{{playlist}}"></app-playlist>
 </div>
 
 
