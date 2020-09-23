@@ -1,0 +1,17 @@
+.container {
+  display: flex; /* or inline-flex */
+  width: 80%;
+}
+
+.resize {
+  width: 200px;
+  height: 200px;
+}
+
+.text {
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+  vertical-align: center;
+  color: white;
+}

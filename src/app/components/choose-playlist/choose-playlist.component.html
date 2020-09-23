@@ -1,0 +1,16 @@
+<div class="full-height">
+<div>
+  <p>Here are you playlists</p>
+  <!--<button (click)="getPlaylists()">Click here to show playlist object</button>-->
+  <input (keyup)="onKey($event)">
+  <button (click)="moveToGame()" >Confirm</button>
+</div>
+
+<p>Chosen Playlist Name: {{this.currentPlaylist.getName()}}</p>
+
+<div *ngFor="let playlist of this.filteredPlaylists" class="outline container">
+  <app-playlist [playlist]="playlist" class = "playlist-info"></app-playlist>
+  <button (click)="onSelect(playlist)" class="select-playlist">Select this playlist</button>
+</div>
+
+</div>

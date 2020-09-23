@@ -1,4 +1,5 @@
 import {Component, Input, OnInit} from '@angular/core';
+import {Playlist} from '../../models/playlist';
 
 @Component({
   selector: 'app-playlist',
@@ -7,11 +8,10 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class PlaylistComponent implements OnInit {
 
-  @Input() playlistData: any;
+  @Input() playlist: Playlist;
 
   constructor() { }
 
   ngOnInit(): void {
   }
-
 }

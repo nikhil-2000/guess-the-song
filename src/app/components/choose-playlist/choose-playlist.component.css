@@ -1,0 +1,19 @@
+.container {
+  display: flex; /* or inline-flex */
+}
+
+.outline {
+  border: 2px solid black;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+.playlist-info {
+  width : 80%;
+}
+
+.select-playlist {
+  background-color: #4CAF50;
+  width: 20%;
+}

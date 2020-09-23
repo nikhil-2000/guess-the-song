@@ -1,0 +1,6 @@
+<div class = "full-height">
+  <p>Login for your playlists to appear</p>
+  <button (click)="login()" *ngIf="!this.isLoggedIn()">Login</button>
+  <button (click)="nextPage()" *ngIf="this.isLoggedIn()"> Next Page</button>
+</div>
+

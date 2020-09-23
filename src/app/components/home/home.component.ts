@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {Router} from '@angular/router';
-import {SpotifyService} from '../services/spotify.service';
+import {SpotifyService} from '../../services/spotify.service';
 
 @Component({
   selector: 'app-home',
@@ -14,12 +14,8 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  startGame = (): void => {
-    if (this.spotifyService.getLoginStatus()){
-      this.router.navigate([`/choose-playlist`]);
-    } else {
-      this.router.navigate((['login']));
-    }
+  startGame(): void {
+    this.router.navigate((['login']));
   }
   check(): void{
     console.log(this.spotifyService.tokens);

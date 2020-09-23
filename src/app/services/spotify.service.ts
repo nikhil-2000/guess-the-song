@@ -6,6 +6,7 @@ import {DefaultUrlSerializer} from '@angular/router';
 import { Router } from '@angular/router';
 import { AuthenticationService } from './authentication.service';
 import {Observable, Subscription} from 'rxjs';
+import {Playlist} from '../models/playlist';
 
 
 @Injectable({
@@ -19,27 +20,18 @@ export class SpotifyService {
     refresh_token : ''
   };
 
-  tokensObservable: Observable<TokenResponse>;
-  code = '';
-  userPlaylists;
-
+  chosenPlaylist: Playlist;
 
   constructor(private http: HttpClient,
               private authService: AuthenticationService,
               private router: Router) { }
 
-  getLoginStatus(): boolean {
-    return this.code.length > 0;
-  }
-
   rerouteIfLoggedIn(): void{
     if (this.getCode() === ''){
+      console.log('Empty Code Still');
     }
     else if (this.tokens.access_token === ''){
-    } else {
-      this.code = this.getCode();
-      this.getAccessToken();
-      this.router.navigate(['/choose-playlist']);
+      this.getAccessToken().subscribe(tokens => this.tokens = tokens);
     }
   }
 
@@ -49,7 +41,7 @@ export class SpotifyService {
     return code == null ? '' : code;
   }
 
-  getAccessToken(): any {
+  getAccessToken(): Observable<TokenResponse> {
     const code = this.getCode();
     const query = 'https://accounts.spotify.com/api/token';
     const body =  querystring.stringify( {
@@ -60,17 +52,15 @@ export class SpotifyService {
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Basic ' + btoa(environment.clientId + ':' + environment.clientSecret));
     headers = headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    this.tokensObservable = this.http.post<TokenResponse>(query, body, {headers});
-    return this.tokensObservable.subscribe(tokens => this.tokens = tokens);
+    return this.http.post<TokenResponse>(query, body, {headers});
 
   }
 
-  getUserPlaylists(): Subscription {
-
+  getUserPlaylists(): Observable<any> {
     const query = 'https://api.spotify.com/v1/me/playlists';
     let headers = new HttpHeaders();
     headers = headers.append('Authorization', 'Bearer ' + this.tokens.access_token);
-    return this.http.get(query, {headers}).subscribe(playlists => this.userPlaylists = playlists.items);
+    return this.http.get(query, {headers});
   }
 }
 
@@ -78,3 +68,5 @@ interface TokenResponse {
   access_token: string;
   refresh_token: string;
 }
+
+
