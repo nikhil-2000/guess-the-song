@@ -1,9 +1,11 @@
-.container {
-  display: flex; /* or inline-flex */
+.container{
+  /*display: flex;*/
+  flex-wrap: wrap;
 }
 
-.outline {
-  border: 2px solid black;
+.playlists-container {
+  display: flex; /* or inline-flex */
+  flex-wrap: nowrap;
   margin: auto;
   padding: 20px;
   text-align: center;
@@ -16,4 +18,13 @@
 .select-playlist {
   background-color: #4CAF50;
   width: 20%;
+}
+
+.current-playlist {
+  padding-right: 40px;
+  float: right;
+}
+
+.search {
+  margin: 10px  10px 10px 6px;
 }

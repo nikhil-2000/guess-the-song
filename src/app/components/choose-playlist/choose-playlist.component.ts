@@ -18,13 +18,13 @@ export class ChoosePlaylistComponent implements OnInit {
   constructor(private router: Router, public spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
-    // this.spotifyService.getUserPlaylists().subscribe(
-    //   data => {
-    //     this.userPlaylists = this.convertToPlaylistObject(data.items);
-    //     console.log(data);
-    //   }
-    // );
-    this.userPlaylists = this.convertToPlaylistObject(mockData.items);
+    this.spotifyService.getUserPlaylists().subscribe(
+      data => {
+        this.userPlaylists = this.convertToPlaylistObject(data.items);
+        console.log(data);
+      }
+    );
+    // this.userPlaylists = this.convertToPlaylistObject(mockData.items);
   }
 
   convertToPlaylistObject(playlistsResponse): Array<Playlist> {

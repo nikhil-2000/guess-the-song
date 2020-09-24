@@ -62,6 +62,13 @@ export class SpotifyService {
     headers = headers.append('Authorization', 'Bearer ' + this.tokens.access_token);
     return this.http.get(query, {headers});
   }
+
+  getTracks(playlist: Playlist): Observable<any> {
+    const query = playlist.getTracks().href;
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + this.tokens.access_token);
+    return this.http.get(query, {headers});
+  }
 }
 
 interface TokenResponse {
