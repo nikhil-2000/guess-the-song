@@ -16,6 +16,8 @@ export class GameComponent implements OnInit {
   play: boolean;
   interval: number;
   tracks: Array<Track>;
+  currentTrack: Track = null;
+  score = 0;
 
   constructor(private spotifyService: SpotifyService) { }
 
@@ -39,11 +41,9 @@ export class GameComponent implements OnInit {
   }
 
   convertToTracks(data): Array<Track> {
-    const tracks = data.items;
-    this.tracks = tracks.map(track => track.track).filter(track => !(track.preview === null))
-      .map(track => new Track(track.name, track.preview_url, track.popularity, track.artists, track.album));
-
-    return this.tracks;
+    const tracks = data.items.map(track => track.track);
+    const removingNullPreview = tracks.filter(track => track.preview_url !== null);
+    return removingNullPreview.map(track => new Track(cleanUpName(track.name), track.preview_url, track.popularity, track.artists, track.album));
   }
 
   getTracks(): void {
@@ -53,23 +53,36 @@ export class GameComponent implements OnInit {
   }
 
   playRandom(): void {
-    const i = Math.floor(Math.random() * this.tracks.length)
-    const randomTrackURL = this.tracks[i];
-    const audio = new Audio();
-    audio.src = randomTrackURL.getPreview();
-    audio.load();
-    audio.play();
-    delete this.tracks[i];
-
+    console.log('Play');
+    const i = Math.floor(Math.random() * this.tracks.length);
+    this.currentTrack = this.tracks.splice(i, 1)[0];
+    console.log(this.currentTrack);
+    this.currentTrack.audio.load();
+    this.currentTrack.audio.play();
+    console.log(this.tracks.length);
   }
+
+  onKey(event): void {
+    const typed = event.target.value;
+
+    if (typed.toUpperCase() === this.currentTrack.getName().toUpperCase()){
+      event.target.value = '';
+      this.currentTrack.audio.pause();
+      this.score++;
+      console.log('Correct');
+      console.log(this.currentTrack);
+      this.playRandom();
+    }
+  }
+
 }
 
 let mockPlaylist;
 let image: Image;
 image = new Image();
-image.height = 640
-image.url = 'https://mosaic.scdn.co/640/ab67616d0000b2732cd55246d935a8a77cb4859eab67616d0000b27360ec4df52c2d724bc53ffec5ab67616d0000b2736f134f8d843353be21a9706eab67616d0000b273c5649add07ed3720be9d5526',
-image.width = 640
+image.height = 640;
+image.url = 'https://mosaic.scdn.co/640/ab67616d0000b2732cd55246d935a8a77cb4859eab67616d0000b27360ec4df52c2d724bc53ffec5ab67616d0000b2736f134f8d843353be21a9706eab67616d0000b273c5649add07ed3720be9d5526';
+image.width = 640;
 mockPlaylist = {
   name: '"Awaken, My Love!"_radio',
   image,
@@ -78,3 +91,7 @@ mockPlaylist = {
     total: 95
 }
 };
+
+function cleanUpName(name: string): string {
+  return name.split('-')[0].split('(')[0].trimEnd();
+}

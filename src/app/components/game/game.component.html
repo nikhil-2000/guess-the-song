@@ -1,9 +1,8 @@
 <div class="full-height">
-  <p>game works!</p>
+  <p>Score : {{this.score}}</p>
   <p>{{this.playlist.getName()}}</p>
 
   <p>Timer : {{this.timeLeft}}</p>
-  <button (click)="this.getTracks()">Load Tracks</button>
   <button (click)="this.playRandom()">Play Random Track</button>
-
+  <input (keyup)="onKey($event)">
 </div>
