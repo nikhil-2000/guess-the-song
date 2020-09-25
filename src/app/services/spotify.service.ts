@@ -41,6 +41,12 @@ export class SpotifyService {
     return code == null ? '' : code;
   }
 
+  getStandardHeader(): HttpHeaders {
+    let headers = new HttpHeaders();
+    headers = headers.append('Authorization', 'Bearer ' + this.tokens.access_token);
+    return headers;
+  }
+
   getAccessToken(): Observable<TokenResponse> {
     const code = this.getCode();
     const query = 'https://accounts.spotify.com/api/token';
@@ -58,16 +64,19 @@ export class SpotifyService {
 
   getUserPlaylists(): Observable<any> {
     const query = 'https://api.spotify.com/v1/me/playlists';
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer ' + this.tokens.access_token);
-    return this.http.get(query, {headers});
+    return this.http.get(query, {headers : this.getStandardHeader()});
   }
 
   getTracks(playlist: Playlist): Observable<any> {
     const query = playlist.getTracks().href;
-    let headers = new HttpHeaders();
-    headers = headers.append('Authorization', 'Bearer ' + this.tokens.access_token);
-    return this.http.get(query, {headers});
+    return this.http.get(query, {headers : this.getStandardHeader()});
+  }
+
+  search(term: string, type: string): Observable<any> {
+    const termNoSpaces = term.replace(' ', '+');
+    const query = 'https://api.spotify.com/v1/search?q=' + termNoSpaces + '&type=' + type;
+    return this.http.get(query, {headers : this.getStandardHeader()});
+
   }
 }
 
