@@ -67,6 +67,11 @@ export class SpotifyService {
     return this.http.get(query, {headers : this.getStandardHeader()});
   }
 
+  getUserLibrary(): Observable<any> {
+    const query = 'https://api.spotify.com/v1/me/tracks';
+    return this.http.get(query, {headers : this.getStandardHeader()});
+  }
+
   getTracks(playlist: Playlist): Observable<any> {
     const query = playlist.getTracks().href;
     return this.http.get(query, {headers : this.getStandardHeader()});

@@ -3,6 +3,7 @@ import {SpotifyService} from '../../services/spotify.service';
 import {SearchResult} from '../../models/search-result';
 import {SearchBarService} from '../../services/search-bar.service';
 import {Subject, Subscription} from 'rxjs';
+import {Track} from '../../models/track';
 
 @Component({
   selector: 'app-search-bar',
@@ -11,7 +12,7 @@ import {Subject, Subscription} from 'rxjs';
 })
 export class SearchBarComponent implements OnInit {
 
-  searchResults: Array<SearchResult>;
+  searchResults: Array<Track>;
   inputText = '';
   inputTextObservable = new Subject<string>();
 
@@ -20,10 +21,10 @@ export class SearchBarComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  convertSearchResults(data): Array<SearchResult> {
+  convertSearchResults(data): Array<Track> {
     const tracks = data.items;
     return tracks
-      .map(track => new SearchResult(cleanUpName(track.name), track.artists));
+      .map(track => new Track(track.name,'',track.popularity,track.artists,track.album));
   }
 
   onKey(): void {

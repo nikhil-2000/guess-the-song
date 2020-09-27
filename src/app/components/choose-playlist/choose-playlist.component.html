@@ -6,6 +6,8 @@
     Chosen Playlist Name: {{this.currentPlaylist.getName()}}<br>
     Number of Tracks: {{this.currentPlaylist.getTracks() === null ? '' : this.currentPlaylist.getTracks().total}}
   </div>
+  <button (click)="showUserPlaylists()"> Your Playlists </button>
+  <button (click)="showPlaylistSearch()"> Search Playlists </button>
 </div>
 
 <input class="search" (keyup)="onKey($event)">

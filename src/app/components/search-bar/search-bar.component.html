@@ -1,14 +1,12 @@
-<div class = "dropdown">
-  <mat-form-field>
-    <mat-label>Type for options to appear</mat-label>
-    <input matInput type="text" [(ngModel)]="inputText" (keyup)="onKey()" required>
-    <div class="options-container">
-    <option class = "option" *ngFor="let res of this.searchResults" (click)="this.onClickResults(res.getName())">
-      {{res.getName()}} - {{res.getArtist()[0].name}}
-    </option>
-    </div>
+<mat-form-field  class = "dropdown">
+  <mat-label>Type for options to appear</mat-label>
+  <input matInput type="text" [(ngModel)]="inputText" (keyup)="onKey()" required>
+  <ul class="options-container">
+  <li class = "option" *ngFor="let res of this.searchResults" (click)="this.onClickResults(res.getName())">
+    {{res.getName()}} - {{res.getArtists()[0].name}}
+  </li>
+  </ul>
+</mat-form-field>
 
 
-  </mat-form-field>
-</div>
 

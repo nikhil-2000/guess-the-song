@@ -14,6 +14,7 @@ export class ChoosePlaylistComponent implements OnInit {
   userPlaylists = new Array<Playlist>();
   filteredPlaylists = new Array<Playlist>();
   currentPlaylist = new Playlist('', null, null);
+  isUserPlaylists = true;
 
   constructor(private router: Router, public spotifyService: SpotifyService) {}
 
@@ -28,6 +29,7 @@ export class ChoosePlaylistComponent implements OnInit {
   }
 
   convertToPlaylistObject(playlistsResponse): Array<Playlist> {
+    console.log(playlistsResponse);
     if (playlistsResponse == null) {return []; }
 
     const convertedPlaylists = new Array<Playlist>();
@@ -36,17 +38,25 @@ export class ChoosePlaylistComponent implements OnInit {
       const playlist = new Playlist(playlistData.name, playlistData.images[0], playlistData.tracks);
       convertedPlaylists.push(playlist);
     }
-
-    this.filteredPlaylists = convertedPlaylists;
+    console.log(convertedPlaylists);
     return convertedPlaylists;
   }
 
   onKey(event): void {
     const filterTerm = event.target.value;
-    this.filteredPlaylists = filterTerm === '' ? this.userPlaylists :
-      this.userPlaylists.filter((element, i, array) => {
-      return element.getName().toLowerCase().includes(filterTerm.toLowerCase());
-    });
+    if (this.isUserPlaylists) {
+      this.filteredPlaylists = filterTerm === '' ? this.userPlaylists :
+        this.userPlaylists.filter((element, i, array) => {
+          return element.getName().toLowerCase().includes(filterTerm.toLowerCase());
+        });
+    } else {
+      if (filterTerm === '') {
+        this.filteredPlaylists = [];
+      } else {
+        this.spotifyService.search(filterTerm, 'playlist')
+          .subscribe(data => this.filteredPlaylists = this.convertToPlaylistObject(data.playlists.items));
+      }
+    }
   }
 
   onSelect(playlist): void {
@@ -61,6 +71,15 @@ export class ChoosePlaylistComponent implements OnInit {
       this.router.navigate(['/game']);
     }
   }
+
+  showUserPlaylists(): void{
+    this.isUserPlaylists = true;
+  }
+
+  showPlaylistSearch(): void{
+    this.isUserPlaylists = false;
+  }
+
 }
 
 const mockData = {

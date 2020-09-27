@@ -14,6 +14,8 @@ import { GameComponent } from './components/game/game.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import {FormsModule} from '@angular/forms';
 import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
+
 
 
 @NgModule({
@@ -23,7 +25,8 @@ import {MatInputModule} from '@angular/material/input';
     AppRoutingModule,
     FormsModule,
     MatInputModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatSelectModule
   ],
   declarations: [
     AppComponent,

@@ -54,7 +54,7 @@ export class GameComponent implements OnInit {
     const tracks = data.items.map(track => track.track);
     const removingNullPreview = tracks.filter(track => track.preview_url !== null);
     return removingNullPreview
-      .map(track => new Track(cleanUpName(track.name), track.preview_url, track.popularity, track.artists, track.album));
+      .map(track => new Track(track.name, track.preview_url, track.popularity, track.artists, track.album));
   }
 
   getTracks(): void {
@@ -72,14 +72,19 @@ export class GameComponent implements OnInit {
     this.currentTrack.audio.play();
   }
 
+  start(): void {
+    this.playRandom();
+    this.startTimer();
+
+  }
+
   checkIfCorrect(name): void {
-    console.log('Checking...');
-    console.log(name)
-    console.log(this.currentTrack.getName());
+
     if (name.toUpperCase() === this.currentTrack.getName().toUpperCase()) {
       this.searchBar.clearInput();
       this.currentTrack.audio.pause();
       this.score++;
+      this.timeLeft += 5;
       console.log('Correct');
       console.log(this.currentTrack);
       this.playRandom();
@@ -103,6 +108,3 @@ export class GameComponent implements OnInit {
 //   }
 // };
 
-function cleanUpName(name: string): string {
-  return name.split('-')[0].split('(')[0].trim();
-}
