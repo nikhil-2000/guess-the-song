@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import {SpotifyService} from '../../services/spotify.service';
-import {SearchResult} from '../../models/search-result';
 import {SearchBarService} from '../../services/search-bar.service';
 import {Subject, Subscription} from 'rxjs';
 import {Track} from '../../models/track';
+import {FormControl} from '@angular/forms';
+import {min} from 'rxjs/operators';
 
 @Component({
   selector: 'app-search-bar',
@@ -15,6 +16,8 @@ export class SearchBarComponent implements OnInit {
   searchResults: Array<Track>;
   inputText = '';
   inputTextObservable = new Subject<string>();
+  selectedIndex = 1;
+
 
   constructor(private spotifyService: SpotifyService, private searchBarService: SearchBarService ) { }
 
@@ -24,7 +27,7 @@ export class SearchBarComponent implements OnInit {
   convertSearchResults(data): Array<Track> {
     const tracks = data.items;
     return tracks
-      .map(track => new Track(track.name,'',track.popularity,track.artists,track.album));
+      .map(track => new Track(track.name, '', track.popularity, track.artists, track.album));
   }
 
   onKey(): void {
@@ -37,17 +40,35 @@ export class SearchBarComponent implements OnInit {
     }
   }
 
+  moveSelector(event): void {
+    const key = event.key;
+    if (key === 'ArrowUp') {
+      this.selectedIndex = Math.max(0, this.selectedIndex - 1);
+    }
+    else if (key === 'ArrowDown') {
+      this.selectedIndex = this.selectedIndex + 1;
+    }
+    else if (key === 'Enter') {
+      this.setInputValueToCurrentSelected();
+    }
+  }
+
   clearInput(): void {
+    console.log('Clearing');
     this.inputText = '';
     this.inputTextObservable.next(this.inputText);
+    this.searchResults.length = 0;
   }
 
   onClickResults(name): void {
     this.inputText = name;
     this.onKey();
   }
+
+  setInputValueToCurrentSelected(): void {
+    this.inputText = this.searchResults[this.selectedIndex].getName();
+  }
 }
 
-function cleanUpName(name: string): string {
-  return name.split('-')[0].split('(')[0].trim();
-}
+
+

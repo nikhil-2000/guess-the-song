@@ -18,7 +18,7 @@ export class SearchBarService {
     this.searchFilterSubject.next(name);
   }
 
-  clearInput(): void{
-    this.searchFilterSubject.next('');
-  }
+  // clearInput(): void{
+  //   this.searchFilterSubject.next('');
+  // }
 }

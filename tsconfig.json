@@ -16,5 +16,8 @@
       "es2019",
       "dom"
     ]
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }

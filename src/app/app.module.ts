@@ -2,6 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {FormsModule} from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import {MatTabsModule} from '@angular/material/tabs';
+
 
 
 import { AppComponent} from './app.component';
@@ -12,10 +18,7 @@ import { PlaylistComponent} from './components/playlist/playlist.component';
 import { LoginComponent } from './components/login/login.component';
 import { GameComponent } from './components/game/game.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import {FormsModule} from '@angular/forms';
-import {MatInputModule} from '@angular/material/input';
-import {MatSelectModule} from '@angular/material/select';
-
+import { ScoreTimerComponent } from './components/score-timer/score-timer.component';
 
 
 @NgModule({
@@ -25,8 +28,10 @@ import {MatSelectModule} from '@angular/material/select';
     AppRoutingModule,
     FormsModule,
     MatInputModule,
+    MatButtonModule,
+    MatCardModule,
+    MatTabsModule,
     BrowserAnimationsModule,
-    MatSelectModule
   ],
   declarations: [
     AppComponent,
@@ -35,7 +40,8 @@ import {MatSelectModule} from '@angular/material/select';
     PlaylistComponent,
     LoginComponent,
     GameComponent,
-    SearchBarComponent
+    SearchBarComponent,
+    ScoreTimerComponent
   ],
   bootstrap: [ AppComponent ]
 })

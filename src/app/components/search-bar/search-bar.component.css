@@ -16,7 +16,13 @@
 
 .option {
   padding: 10px;
-  list-style: none;
   color: white;
+}
+
+.option-selected {
+  color: black;
+  list-style: none;
+  background-color: green;
+  padding: 10px;
 
 }

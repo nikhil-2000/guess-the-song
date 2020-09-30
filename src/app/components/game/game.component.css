@@ -1,0 +1,18 @@
+.container{
+  padding: 10px;
+}
+
+.button {
+  height: 80%;
+  margin: 5px;
+  background-color: black;
+  color: white;
+}
+
+.button:hover {
+  background-color: #222222;
+}
+
+.search {
+  margin: 10px  10px 10px 6px;
+}

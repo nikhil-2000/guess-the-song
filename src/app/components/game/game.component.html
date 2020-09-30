@@ -1,8 +1,7 @@
 <div class="full-height">
-  <app-playlist [playlist]="this.playlist"></app-playlist>
-  <p>Score : {{this.score}}</p>
-
-  <p>Timer : {{this.timeLeft}}</p>
-  <button (click)="start()">START</button>
+  <app-playlist [playlist]="this.playlist" [isSelected]="false" [showButton]="false"></app-playlist>
+  <button mat-raised-button class = "button" (click)="start()">START</button>
+  <button mat-raised-button class = "button" (click)="skip()">PASS</button>
   <app-search-bar></app-search-bar>
+  <app-score-timer></app-score-timer>
 </div>

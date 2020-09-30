@@ -1,6 +1,6 @@
 .container {
   display: flex; /* or inline-flex */
-  width: 80%;
+  width: 100%;
 }
 
 .resize {
@@ -11,7 +11,32 @@
 .text {
   margin: auto;
   padding: 20px;
+  font-size: 30px;
   text-align: center;
   vertical-align: center;
   color: white;
 }
+
+.button {
+  background-color: black;
+  box-shadow: 5px 10px #317033;
+  color: white;
+  width: 190px;
+  height: 190px;
+  margin-left: 10px;
+  margin-right: 10px;
+  align-self: center;
+  vertical-align: center;
+}
+
+.button:hover {
+  background-color: #222222;
+}
+
+.button:focus {
+  outline: none;
+  background-color: white;
+  color: black;
+  -webkit-box-shadow: inset 0px 0px 15px #317033;
+  -moz-box-shadow: inset 0px 0px 15px #317033;
+  box-shadow: inset 0px 0px 15px #317033;}
