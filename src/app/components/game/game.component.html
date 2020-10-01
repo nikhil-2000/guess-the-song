@@ -1,7 +1,17 @@
-<div class="full-height">
-  <app-playlist [playlist]="this.playlist" [isSelected]="false" [showButton]="false"></app-playlist>
+<div class="full-height container">
+  <app-playlist class="playlist" [playlist]="this.playlist" [isSelected]="false" [showButton]="false"></app-playlist>
   <button mat-raised-button class = "button" (click)="start()">START</button>
   <button mat-raised-button class = "button" (click)="skip()">PASS</button>
-  <app-search-bar></app-search-bar>
-  <app-score-timer></app-score-timer>
+  <app-search-bar class="search"></app-search-bar>
+  <mat-card class="score-timer">
+    <p class="board-title">Score</p>
+    <mat-card class="board">
+      <p>{{this.score}}</p>
+    </mat-card>
+    <p class="board-title">Time</p>
+    <mat-card class="board">
+      <p>{{this.timeLeft | number:'1.0-2' }}</p>
+    </mat-card>
+  </mat-card>
+
 </div>

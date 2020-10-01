@@ -23,12 +23,12 @@ export class ChoosePlaylistComponent implements OnInit {
 
   ngOnInit(): void {
     this.onKey('');
-    // this.spotifyService.getUserPlaylists().subscribe(
-    //   data => {
-    //     this.userPlaylists = this.convertToPlaylistObject(data.items);
-    //     this.onKey('');
-    //   }
-    // );
+    this.spotifyService.getUserPlaylists().subscribe(
+      data => {
+        this.userPlaylists = this.convertToPlaylistObject(data.items);
+        this.onKey('');
+      }
+    );
     this.choosePlaylistService.playlistSubject.subscribe(
       value => this.currentPlaylist = value
     );

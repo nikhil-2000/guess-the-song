@@ -2,11 +2,11 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {FormsModule} from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {MatTabsModule} from '@angular/material/tabs';
+import { MatTabsModule } from '@angular/material/tabs';
 
 
 
@@ -18,7 +18,6 @@ import { PlaylistComponent} from './components/playlist/playlist.component';
 import { LoginComponent } from './components/login/login.component';
 import { GameComponent } from './components/game/game.component';
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
-import { ScoreTimerComponent } from './components/score-timer/score-timer.component';
 
 
 @NgModule({
@@ -40,8 +39,7 @@ import { ScoreTimerComponent } from './components/score-timer/score-timer.compon
     PlaylistComponent,
     LoginComponent,
     GameComponent,
-    SearchBarComponent,
-    ScoreTimerComponent
+    SearchBarComponent
   ],
   bootstrap: [ AppComponent ]
 })

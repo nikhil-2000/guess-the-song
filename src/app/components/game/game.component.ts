@@ -5,7 +5,6 @@ import {Track} from '../../models/track';
 import {SearchBarService} from '../../services/search-bar.service';
 import {SearchBarComponent} from '../search-bar/search-bar.component';
 import { Image } from '../../models/image';
-import {ScoreTimerService} from '../../services/score-timer.service';
 
 
 @Component({
@@ -24,14 +23,12 @@ export class GameComponent implements OnInit {
 
   @ViewChild(SearchBarComponent) searchBar;
 
-  constructor(private spotifyService: SpotifyService, private searchBarService: SearchBarService, private scoreTimerSerice: ScoreTimerService ) { }
+  constructor(private spotifyService: SpotifyService, private searchBarService: SearchBarService) { }
 
   ngOnInit(): void {
-    this.playlist = mockPlaylist;
+    this.playlist = this.spotifyService.chosenPlaylist;
     this.getTracks();
     this.searchBarService.searchFilterSubject.subscribe(name => this.checkIfCorrect(name));
-    this.scoreTimerSerice.setTimer(this.timeLeft);
-    this.scoreTimerSerice.setScore(this.score);
 
     // this.startTimer();
   }
@@ -43,7 +40,7 @@ export class GameComponent implements OnInit {
   startTimer(): void {
     const timeChange = 0.1;
     this.interval = setInterval(() => {
-      this.scoreTimerSerice.setTimer(Math.max(this.timeLeft - timeChange, 0));
+      this.timeLeft = Math.max(this.timeLeft - timeChange, 0);
       if (this.timeLeft === 0) { this.gameOver(); }
     }, timeChange * 1000);
   }
@@ -91,9 +88,7 @@ export class GameComponent implements OnInit {
       this.searchBar.clearInput();
       this.currentTrack.audio.pause();
       this.score++;
-      this.scoreTimerSerice.setScore(this.score);
       this.timeLeft += 5;
-      this.scoreTimerSerice.setTimer(this.timeLeft);
       console.log(this.currentTrack);
       this.playRandom();
     }

@@ -1,5 +1,12 @@
 .container{
   padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+.playlist{
+  width: 100%;
 }
 
 .button {
@@ -14,5 +21,42 @@
 }
 
 .search {
-  margin: 10px  10px 10px 6px;
+  margin: 0px  10px 10px 10px;
+  width: 60%;
 }
+
+.score-timer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  width: 300px;
+  margin: 40px;
+  text-align: center;
+
+}
+@font-face{
+  font-family:'digital-clock-font';
+  src: url('~src/assets/digital-7.ttf');
+}
+
+.board-title {
+  padding: 20px 3px 3px 5px;
+}
+
+.board {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 25%;
+  width: 80%;
+  font-family:'digital-clock-font';
+  font-size: 30px;
+  background: #cb0000;
+  -webkit-box-shadow: inset 0px 0px 15px white;
+  -moz-box-shadow: inset 0px 0px 15px white;
+  box-shadow: inset 0px 0px 15px white;
+}
+
+
