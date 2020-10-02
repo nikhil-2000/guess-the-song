@@ -35,7 +35,6 @@ export class ChoosePlaylistComponent implements OnInit {
   }
 
   convertToPlaylistObject(playlistsResponse): Array<Playlist> {
-    console.log(playlistsResponse);
     if (playlistsResponse == null) {return []; }
 
     const convertedPlaylists = new Array<Playlist>();
@@ -73,14 +72,12 @@ export class ChoosePlaylistComponent implements OnInit {
   }
 
   showUserPlaylists(): void{
-    console.log('my');
 
     this.isUserPlaylists = true;
     this.onKey('');
   }
 
   showPlaylistSearch(): void {
-    console.log('search');
     this.isUserPlaylists = false;
     this.onKey('');
   }

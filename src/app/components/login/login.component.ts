@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.spotifyService.rerouteIfLoggedIn();
+    console.log(this.authService.redirectURI);
   }
 
   login(): void{

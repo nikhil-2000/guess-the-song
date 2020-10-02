@@ -13,7 +13,6 @@ export class SearchBarService {
   constructor() { }
 
   setFilter(name: string): void{
-    console.log('Setting Filter')
     this.searchFilter = name;
     this.searchFilterSubject.next(name);
   }

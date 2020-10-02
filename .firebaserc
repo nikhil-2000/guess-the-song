@@ -1,0 +1,11 @@
+{
+  "targets": {
+    "guessthesong-79c77": {
+      "hosting": {
+        "GuessTheSong": [
+          "guessthesong-79c77"
+        ]
+      }
+    }
+  }
+}

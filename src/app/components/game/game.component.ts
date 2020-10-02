@@ -76,6 +76,7 @@ export class GameComponent implements OnInit {
   }
 
   skip(): void {
+    console.log('Skipped')
     this.searchBar.clearInput();
     this.currentTrack.audio.pause();
     this.timeLeft -= 5;

@@ -54,10 +54,9 @@ export class SearchBarComponent implements OnInit {
   }
 
   clearInput(): void {
-    console.log('Clearing');
     this.inputText = '';
     this.inputTextObservable.next(this.inputText);
-    this.searchResults.length = 0;
+    if (this.searchResults) {this.searchResults.length = 0; }
   }
 
   onClickResults(name): void {

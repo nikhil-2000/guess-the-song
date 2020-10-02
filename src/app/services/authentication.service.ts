@@ -6,12 +6,16 @@ import {environment} from '../../environments/environment.prod';
   providedIn: 'root'
 })
 export class AuthenticationService {
+  redirectURI = window.location.href.includes('localhost')
+    ? 'http://localhost:4200/login'
+    : 'https://guessthesong-79c77.web.app/login';
 
-  redirectURI = 'http://localhost:4200/login';
-
-  constructor() { }
+  constructor() {
+    console.log(this.redirectURI);
+  }
 
   getAuthToken(): void {
+
     const query = 'https://accounts.spotify.com/authorize?' +
       querystring.stringify({
         response_type: 'code',

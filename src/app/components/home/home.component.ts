@@ -12,6 +12,7 @@ export class HomeComponent implements OnInit {
   constructor(private router: Router, private spotifyService: SpotifyService) {}
 
   ngOnInit(): void {
+    console.log(window.location.href);
   }
 
   startGame(): void {
